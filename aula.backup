@@ -1,0 +1,300 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.1
+-- Dumped by pg_dump version 9.1.1
+-- Started on 2023-02-18 02:17:02
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 167 (class 3079 OID 11638)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1877 (class 0 OID 0)
+-- Dependencies: 167
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 162 (class 1259 OID 868653)
+-- Dependencies: 5
+-- Name: empleados; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empleados (
+    id integer NOT NULL,
+    dni character varying(255),
+    nombres character varying(255),
+    apellidos character varying(255),
+    direccion character varying(255),
+    telefono character varying(255)
+);
+
+
+ALTER TABLE public.empleados OWNER TO postgres;
+
+--
+-- TOC entry 161 (class 1259 OID 868651)
+-- Dependencies: 162 5
+-- Name: empleados_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE empleados_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.empleados_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1878 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: empleados_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE empleados_id_seq OWNED BY empleados.id;
+
+
+--
+-- TOC entry 1879 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: empleados_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('empleados_id_seq', 2, true);
+
+
+--
+-- TOC entry 164 (class 1259 OID 868664)
+-- Dependencies: 5
+-- Name: libros; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE libros (
+    id integer NOT NULL,
+    isbn character varying(255),
+    edicion character varying(255),
+    nombres character varying(255),
+    paginas integer
+);
+
+
+ALTER TABLE public.libros OWNER TO postgres;
+
+--
+-- TOC entry 163 (class 1259 OID 868662)
+-- Dependencies: 164 5
+-- Name: libros_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE libros_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.libros_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1880 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: libros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE libros_id_seq OWNED BY libros.id;
+
+
+--
+-- TOC entry 1881 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: libros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('libros_id_seq', 3, true);
+
+
+--
+-- TOC entry 166 (class 1259 OID 868675)
+-- Dependencies: 5
+-- Name: productos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE productos (
+    id integer NOT NULL,
+    cantidad double precision,
+    nombres character varying(255),
+    precio double precision,
+    unidadmedida character varying(255)
+);
+
+
+ALTER TABLE public.productos OWNER TO postgres;
+
+--
+-- TOC entry 165 (class 1259 OID 868673)
+-- Dependencies: 166 5
+-- Name: productos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE productos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.productos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1882 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: productos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE productos_id_seq OWNED BY productos.id;
+
+
+--
+-- TOC entry 1883 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: productos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('productos_id_seq', 3, true);
+
+
+--
+-- TOC entry 1860 (class 2604 OID 868656)
+-- Dependencies: 162 161 162
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE empleados ALTER COLUMN id SET DEFAULT nextval('empleados_id_seq'::regclass);
+
+
+--
+-- TOC entry 1861 (class 2604 OID 868667)
+-- Dependencies: 164 163 164
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE libros ALTER COLUMN id SET DEFAULT nextval('libros_id_seq'::regclass);
+
+
+--
+-- TOC entry 1862 (class 2604 OID 868678)
+-- Dependencies: 165 166 166
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE productos ALTER COLUMN id SET DEFAULT nextval('productos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1869 (class 0 OID 868653)
+-- Dependencies: 162
+-- Data for Name: empleados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY empleados (id, dni, nombres, apellidos, direccion, telefono) FROM stdin;
+2	98734567	Manuel	Garcia Salazar	Av. Grau 1234 Chcialyo	987345234
+\.
+
+
+--
+-- TOC entry 1870 (class 0 OID 868664)
+-- Dependencies: 164
+-- Data for Name: libros; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY libros (id, isbn, edicion, nombres, paginas) FROM stdin;
+1	SDF345RDG-FH54	Tercera 2023	PROGRAMACION JAVA III	222
+3	\N	\N	MARTILLO	\N
+\.
+
+
+--
+-- TOC entry 1871 (class 0 OID 868675)
+-- Dependencies: 166
+-- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY productos (id, cantidad, nombres, precio, unidadmedida) FROM stdin;
+2	40	ALAMBRE 12	5	METRO
+\.
+
+
+--
+-- TOC entry 1864 (class 2606 OID 868661)
+-- Dependencies: 162 162
+-- Name: empleados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empleados
+    ADD CONSTRAINT empleados_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1866 (class 2606 OID 868672)
+-- Dependencies: 164 164
+-- Name: libros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY libros
+    ADD CONSTRAINT libros_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1868 (class 2606 OID 868683)
+-- Dependencies: 166 166
+-- Name: productos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY productos
+    ADD CONSTRAINT productos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1876 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2023-02-18 02:17:02
+
+--
+-- PostgreSQL database dump complete
+--
+
